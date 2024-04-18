@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+dataset = pd.read_csv(r"D:\dataset for ML\Heart_Disease_Prediction.csv")
+
+dataset
+
+X = dataset.iloc[:, [1, 2]].values
+y = dataset.iloc[:, -1].values
+
+x
+
+y
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.20,random_state=0)
+
+k=3
+
+knn = KNeighborsClassifier(n_neighbors=k)
+
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+
+correct_predictions = 0
+wrong_predictions = 0
+for i in range(len(y_test)):
+  if y_test[i] == y_pred[i]:
+    print(f"Correct prediction: Predicted {y_pred[i]}, Actual {y_test[i]}")
+    correct_predictions += 1
+  else:
+    print(f"Wrong prediction: Predicted {y_pred[i]}, Actual {y_test[i]}")
+    wrong_predictions += 1
+print(f"\nTotal correct predictions: {correct_predictions}")
+print(f"Total wrong predictions: {wrong_predictions}")
+
